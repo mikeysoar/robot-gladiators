@@ -9,16 +9,16 @@ var enemyAttack = 12;
 
 console.log(enemyNames);
 console.log(enemyNames.length);
-// console,log(enemyNames[0]);
-// console.log(enemyNames[3]);
+console.log(enemyNames[0]);
+console.log(enemyNames[3]);
 
 //fight function (nowwith parameter for enemy's name)
 var fight = function(enemyName) {   
-    while(enemyHealth > 0 && enemyHealth > 0) {
+    while (enemyHealth > 0 && enemyHealth > 0) {
         //ask player if they want to fight or run
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'fight' or 'skip' tpo choose.");
         
-//if player picks "skip" confirm and then stop the loop
+        //if player picks "skip" confirm and then stop the loop
         if (promptFight === "skip" || promptFight === "SKIP") {
             //confirm player wants to skip
             var confirmSkip = window.confirm("Are you sure you'd like to quit?");
@@ -33,23 +33,22 @@ var fight = function(enemyName) {
             }
         }
         // remove enemy's health by subtracting the amount set in the playerAttack varible
-
         enenyHealth = enemyHealth - playerAttack;
         console.log (
-            playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enenyHealth + " health remaining."
+            playerName + ' attacked ' + enemyName + '. ' + enemyName + ' now has ' + enenyHealth + ' health remaining.'
         );
 
         //check enemy's health
         if (enenyHealth <= 0) {
             window.alert(enemyName + " had died!");
 
-        // award player money for winning            
-        playerMoney = playerMoney + 20;
+            // award player money for winning            
+            playerMoney = playerMoney + 20;
 
-        // leave while () loop since enemy is dead
+            // leave while () loop since enemy is dead
             break;
         } else {
-            window.alert(enemyName + " still has " + enenyHealth + " health left.");
+        window.alert(enemyName + " still has " + enenyHealth + " health left.");
         }
 
         //remove player's health by subtracting the amount set in the enemyAtack variable

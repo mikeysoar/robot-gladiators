@@ -65,7 +65,6 @@ var fight = function() {
         window.alert("You need to choose a valid option. Try agian!");
     }
 
-
     //Subtract the value of the 'playerAttack' from the value of 'enemyhealth' and use the result to update the value in the 'enemyHealth' varible
     enemyHealth = enemyHealth - playerAttack;
     //Log a resulting message to the console so we know that it worked.

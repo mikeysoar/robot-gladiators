@@ -16,7 +16,7 @@ console.log(enemyNames[3]);
 var fight = function (enemyName) {
     while (enemyHealth > 0 && enemyHealth > 0) {
         //ask player if they want to fight or run
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'fight' or 'skip' tpo choose.");
+        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'fight' or 'skip' to choose.");
 
         //if player picks "skip" confirm and then stop the loop
         if (promptFight === "skip" || promptFight === "SKIP") {
@@ -78,23 +78,37 @@ var startGame = function () {
 
     // fight each enemy-robot by looping over them and fighting them one at a time
     for (var i = 0; i < enemyNames.length; i++) {
-    //if player is still alive, keep fighting
-    if (playerHealth > 0) {
-        //let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
-        window.alert('Welcome to robot Gladiators! Round' + (i + 1));
+        //if player is still alive, keep fighting
+        if (playerHealth > 0) {
+            //let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
+            window.alert('Welcome to robot Gladiators! Round' + (i + 1));
 
-        // pick new enemy to fight based on the index of the enemyNames array    
-        var pickedEnemyName = enemyNames[i];
+            // pick new enemy to fight based on the index of the enemyNames array    
+            var pickedEnemyName = enemyNames[i];
 
-        // rest enemyHealth before starting new fight
-        enemyHealth = 50;
+            // rest enemyHealth before starting new fight
+            enemyHealth = 50;
 
-        // pass the pickedEnemyName variabl's value into the fight function, where it will assu,me the value of the enemyName parameter
-        fight(pickedEnemyName);
-    }
+            // pass the pickedEnemyName variabl's value into the fight function, where it will assu,me the value of the enemyName parameter
+            fight(pickedEnemyName);
+        
+            // if player is still alive and we're not at the last enemy in the array
+            if (playerHealth > 0 && i < enemyNames.length -1) {
+                //ask if player wants to use the store before next round
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round");
+                
+                //if yes, take them to the store() function
+                if (storeConfirm) {
+                    shop();
+                }
+            }
+        } 
 
-    // if player isn't alive, stop the game
-    else {
+        
+
+
+        // if player isn't alive, stop the game
+        else {
         window.alert('You have lost your robot in battle! Game Over!');
         break;
     }
@@ -123,8 +137,56 @@ var endGame = function() {
     }
 };
 
+// go to shop between battles function
+var shop = function() {
+    // ask player what they want to do
+    var shopOptionPrompt = window.prompt (
+        "Would you like to REFILL your health, UPGRADE your attack or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice. "
+    ); 
 
+    // use switch to carroy out option
+    switch (shopOptionPrompt) {
+        case "REFILL": // new case
+        case "refill":
+            if (playerMoney >= 7) {
+                window.alert("Refilling player's health by 20 for 7 dollars.")
+        
+                // increase health and decrese money
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+        }
+        else {
+            window.alert("You don't have enough money!");
+        }
 
+            break;
+        case "UPGRADE": // new case   
+        case "upgrade":
+            if (playerMoney >= 7) {
+                windows.alert("Upgrading player's attack by 6 for 7 dolllars.");
+
+                // increase attack and decrease money
+                playerAttack = playerAttack + 6;
+                playerMoney = playerMoney - 7;
+        }
+        else {
+            window.alert("You don't have enough money!");
+        }
+            break;
+        case "LEAVE": // new case    
+        case "leave": 
+            window.alert("Leaving the store.");
+
+            // do nothing, so function will end
+            break;
+        default:
+            window.alert("You did not pick a valid option. Try again.");
+
+            //call shop() again to force player to pick a valid option
+            shop();
+            break;
+    }
+};
 
 // start the game when the page loads
 startGame();

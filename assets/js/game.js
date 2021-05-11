@@ -9,16 +9,49 @@ var randomNumber = function (min, max) {
     return value;
 };
 
+// function to check if player wants to fight or skip
+var fightOrSkip = function(){
+    //ask player if they'd like to fight or skip
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+
+    // Validat prompt answer
+    if (promptFight === "" || promptFight === null) {
+        window.alert("Tou need to provide a valid answer! Please try again.");
+        //use return to call it again and stop the reast of this function from running
+        return fightOrSkip();
+    }
+
+    //convert propmtFight to all lowercase so we can check with les options
+    promptFight = promptFight.toLowerCase();
+    
+    if (promptFight === "skip") {
+        //confirm player wants to skip
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+    
+        //if yes (true), leave fight
+        if (confirmSkip) {
+            window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+            //subtract money from playerMoney for skipping, but dont let them go into the negative
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
+        
+            //return true idfplayer wants to leave
+            return true;
+        }
+    }    
+    return false;
+}
+
+
 //fight function (nowwith parameter for enemy's name)
 var fight = function (enemy) {
     while (playerInfo.health > 0 && enemy.health > 0) {
-        //ask player if they want to fight or run
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'fight' or 'skip' to choose.");
-
-        //if player picks "skip" confirm and then stop the loop
-        if (promptFight === "skip" || promptFight === "SKIP") {
-            //confirm player wants to skip
-            var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+        //ask player if they'd like to fight or skip usijng fightSkip function
+        if (fightOrSkip()) {
+            //if true, leave fight by breaking loop
+            break;
+        }
+            var damage = randomNumber(playerInfo.attack -3, playerInfo.attack);
+            
 
             //if yes (true), leave fight
             if (confirmSkip) {
@@ -62,7 +95,7 @@ var fight = function (enemy) {
             window.alert(playerInfo.name + " has died!");
             // leave while() loop if player is dead
             break;
-        } else {
+            } else {
             window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
         }
     }

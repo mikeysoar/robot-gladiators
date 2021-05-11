@@ -50,16 +50,16 @@ var fight = function (enemy) {
             //if true, leave fight by breaking loop
             break;
         }
-            var damage = randomNumber(playerInfo.attack -3, playerInfo.attack);
-            
 
-            //if yes (true), leave fight
-            if (confirmSkip) {
-                window.alert(playerInfo.name + ' has decided to skip this fight. Goodbye!')
-                //subtract money from playerMoney for skipping
-                playerInfo.money = Math.max(0, playerInfo.money - 10);
-                console.log("playerMoney", playerInfo.money);
-                break;
+        var damage = randomNumber(playerInfo.attack -3, playerInfo.attack);
+            
+        //if yes (true), leave fight
+        if (confirmSkip) {
+            window.alert(playerInfo.name + ' has decided to skip this fight. Goodbye!')
+            //subtract money from playerMoney for skipping
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
+            console.log("playerMoney", playerInfo.money);
+             break;
             }
         }
         // generate random damage value based on player's attack power
@@ -168,29 +168,27 @@ var endGame = function () {
 var shop = function () {
     // ask player what they want to do
     var shopOptionPrompt = window.prompt(
-        "Would you like to REFILL your health, UPGRADE your attack or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice. "
+        "Would you like to REFILL your health, UPGRADE your attack or LEAVE the store? Please enter one 1 for REFILL, 2 for UPGRADE, or 3 to LEAVE."
     );
+    
+    //convert answer from prompt to actual number
+    shopOptionPrompt = parseInt(shopOptionPrompt);
 
     // use switch to carroy out option
     switch (shopOptionPrompt) {
-        case "REFILL":
-        case "refill":
+        case 1:
             playerInfo.refillHealth();
             break;
-        case "UPGRADE": // new case   
-        case "upgrade":
+        case 2:
            playerInfo.upgradeAttack();
             break;
-        case "LEAVE": // new case    
-        case "leave":
+        case 3:
             window.alert("Leaving the store.");
 
             // do nothing, so function will end
             break;
         default:
-            window.alert("You did not pick a valid option. Try again.");
-
-            //call shop() again to force player to pick a valid option
+            window.alert("You did not pick a valid option. Try again.");            
             shop();
             break;
     }

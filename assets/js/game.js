@@ -1,10 +1,8 @@
 /* Game functions*/
 
-
-
 //function to generate random numeric value
 var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
+    var value = Math.floor(Math.random() * (max - min) + min);
 
     return value;
 };
@@ -71,7 +69,7 @@ var fight = function (enemy) {
                enemy.name +
                " now has " +
                enemy.health +
-               "health remaining. " 
+               " health remaining." 
             );
 
             //check enem'y health
@@ -84,31 +82,30 @@ var fight = function (enemy) {
                 //leave while() loop since enmy is dead
                 break;
             } else {
-                window.alert(enemy.name + " still has " + enemy.health + "health left.");
+                window.alert(enemy.name + " still has " + enemy.health + " health left.");
             }
             //player get attacked first
         } else {
             var damage = randomNumber(enemy.attack - 3, enemy.attack);
 
-            // remove player's health by subtracting the amount we set in the damage variable
+            // remove enemy's health by subtracting the amount we set in the damage variable
             playerInfo.health = Math.max(0, playerInfo.health - damage);
             console.log(
                 enemy.name +
-                +
                 " attacked " +
                 playerInfo.name +
                 ". " +
                 playerInfo.name +
-                "now has " +
+                " now has " +
                 playerInfo.health +
-                "health remaining."
+                " health remaining."
             );
 
             // check players health
             if (playerInfo.health <= 0) {
-                window.alert(playerInfo,name + "has died!");
+                window.alert(playerInfo.name + "has died!");
                 // leave while() loo[ if player is dead
-            break;]
+            break;
             } else {
                 window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
             }
@@ -230,6 +227,7 @@ var getPlayerName = function() {
         name = prompt("What is your robot's name?");
     }
     console.log("Your robot's name is " + name);
+    return name;
 };
 
 
